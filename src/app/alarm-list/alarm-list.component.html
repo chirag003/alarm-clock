@@ -1,0 +1,40 @@
+<div class="alarm-table-wrapper mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" class="alarm-table">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+            <mat-header-cell class="alarm-table-cell alarm-table-position-column" *matHeaderCellDef> No. </mat-header-cell>
+            <mat-cell class="alarm-table-cell alarm-table-position-column" *matCellDef="let element; let i = index"> {{i + 1}} </mat-cell>
+        </ng-container>
+
+        <!-- Moment Column -->
+        <ng-container matColumnDef="moment">
+            <mat-header-cell class="alarm-table-cell alarm-table-moment-column" *matHeaderCellDef> Alarm Moment </mat-header-cell>
+            <mat-cell class="alarm-table-cell alarm-table-moment-column" *matCellDef="let element"> {{element.date_time | date: 'medium'}} </mat-cell>
+        </ng-container>
+
+        <!-- Status Column -->
+        <ng-container matColumnDef="status">
+            <mat-header-cell class="alarm-table-cell alarm-table-status-column" *matHeaderCellDef> Status </mat-header-cell>
+            <mat-cell class="alarm-table-cell alarm-table-status-column" *matCellDef="let element">
+                <button mat-icon-button [color]="element.status? 'primary' : ''"
+                        (click)="handleToggleBtnClick($event, element)">
+                    <mat-icon aria-label="Toggle Alarm Status">alarm</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+
+        <!-- Action Column -->
+        <ng-container matColumnDef="action">
+            <mat-header-cell class="alarm-table-cell alarm-table-action-column" *matHeaderCellDef></mat-header-cell>
+            <mat-cell class="alarm-table-cell alarm-table-action-column" *matCellDef="let element">
+                <button mat-icon-button color="accent" (click)="handleCancelBtnClick($event, element)">
+                    <mat-icon aria-label="Remove Alarm">cancel</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+        <mat-row [class.alarm-table-disable-row]="!row.in" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </table>
+</div>

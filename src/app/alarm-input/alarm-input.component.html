@@ -1,0 +1,8 @@
+<mat-form-field class="alarm-form-field">
+    <input matInput [(ngModel)]="value"
+           [owlDateTime]="dt" [owlDateTimeTrigger]="dt"
+           placeholder="Choose the alarm time" readonly>
+    <owl-date-time [pickerMode]="'dialog'" [showSecondsTimer]="true" #dt></owl-date-time>
+</mat-form-field>
+<button class="alarm-form-button" mat-stroked-button color="primary"
+        (click)="handleAddBtnClick()">Add</button>
